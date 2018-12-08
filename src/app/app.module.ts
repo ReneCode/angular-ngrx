@@ -1,12 +1,14 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { StoreModule } from "@ngrx/store";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { ProjectMasterComponent } from './project-master/project-master.component';
-import { ProjectDetailComponent } from './project-detail/project-detail.component';
-import { ProjectComponent } from './project/project.component';
-import { HomeComponent } from './home/home.component';
+import { projectReducer } from "./store/project.reducer";
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./components/app.component";
+import { ProjectMasterComponent } from "./components/project/project-master/project-master.component";
+import { ProjectDetailComponent } from "./components/project/project-detail/project-detail.component";
+import { ProjectComponent } from "./components/project/project.component";
+import { HomeComponent } from "./components/home/home.component";
 
 @NgModule({
   declarations: [
@@ -18,9 +20,10 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({ project: projectReducer })
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
