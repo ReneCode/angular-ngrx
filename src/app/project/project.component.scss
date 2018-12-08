@@ -1,0 +1,14 @@
+.master-detail {
+  display: flex;
+  flex-direction: row;
+}
+
+.master {
+  background: #688;
+  flex-grow: 1;
+}
+
+.detail {
+  background: #868;
+  flex-grow: 5;
+}
