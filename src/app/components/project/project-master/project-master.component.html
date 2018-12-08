@@ -1,5 +1,5 @@
 <div *ngFor="let project of (projects$ | async)">
   <div class="project-item" (click)="selectProject(project)">
-    Project: {{ project }}
+    <img src="{{project.image}}" width="40" /> {{ project.name }}
   </div>
 </div>

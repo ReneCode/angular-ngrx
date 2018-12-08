@@ -3,7 +3,10 @@ import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { select, Store } from "@ngrx/store";
 import { IProjectState } from "src/app/store/project.reducer";
-import { SelectProject } from "src/app/store/project.actions";
+import {
+  SelectProject,
+  LoadProjectTrigger
+} from "src/app/store/project.actions";
 
 @Component({
   selector: "app-project-master",
@@ -11,7 +14,7 @@ import { SelectProject } from "src/app/store/project.actions";
   styleUrls: ["./project-master.component.scss"]
 })
 export class ProjectMasterComponent implements OnInit {
-  projects$: Observable<string[]>;
+  projects$: Observable<object[]>;
   id$: Observable<string>;
 
   constructor(private store: Store<{ project: IProjectState }>) {
@@ -21,9 +24,11 @@ export class ProjectMasterComponent implements OnInit {
     );
   }
 
-  selectProject(project: string) {
-    this.store.dispatch(new SelectProject(project));
+  selectProject(project: object) {
+    this.store.dispatch(new SelectProject(project.id));
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store.dispatch(new LoadProjectTrigger());
+  }
 }

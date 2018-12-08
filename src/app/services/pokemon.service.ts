@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
+import { map } from "rxjs/operators";
+import { of, Observable } from "rxjs";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,7 +17,18 @@ export class PokemonService {
 
   constructor(private http: HttpClient) {}
 
-  getAll() {
-    return this.http.get(this.url);
+  getAll(): Observable<object> {
+    const body = {
+      query: `
+      {
+        pokemons(first: 100){id name  image classification}
+        }
+      `
+    };
+
+    return this.http.post(this.url, body).pipe(
+      map((d: any) => d.data.pokemons)
+      // map((p: any) => p.name)
+    );
   }
 }
