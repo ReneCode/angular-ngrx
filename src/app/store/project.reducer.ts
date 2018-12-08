@@ -1,21 +1,23 @@
 import { Action } from "@ngrx/store";
+import { ProjectActionTypes } from "./project.actions";
 
-// export interface IProjectState {
-//   items: number[];
-//   id: string;
-// }
-// const initialState: IProjectState = {
-//   items: [1, 2, 3, 4],
-//   id: "hallo"
-// };
+export interface IProjectState {
+  projects: string[];
+  selectedProject: string;
+}
+const initialState: IProjectState = {
+  projects: ["a", "b", "C", "D", "E"],
+  selectedProject: ""
+};
 
-export function projectReducer(
-  // state: IProjectState = initialState,
-  state = 42,
-  action: Action
-) {
+export function projectReducer(state: IProjectState = initialState, action) {
   switch (action.type) {
     default:
       return state;
+    case ProjectActionTypes.SelectProject:
+      return {
+        ...state,
+        selectedProject: action.payload
+      };
   }
 }

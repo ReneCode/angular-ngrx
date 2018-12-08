@@ -1,2 +1,5 @@
-<p>project-master works!</p>
-<div>Id: {{ project$ | async }}</div>
+<div *ngFor="let project of (projects$ | async)">
+  <div class="project-item" (click)="selectProject(project)">
+    Project: {{ project }}
+  </div>
+</div>
