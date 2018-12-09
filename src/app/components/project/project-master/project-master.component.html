@@ -1,5 +1,9 @@
-<div *ngFor="let project of (projects$ | async)">
-  <div class="project-item" (click)="selectProject(project)">
-    <img src="{{project.image}}" width="40" /> {{ project.name }}
+<div class="scrolling">
+  <div class="project-list">
+    <div *ngFor="let project of (projects$ | async)">
+      <div class="project-item" (click)="selectProject(project)">
+        <img src="{{project.image}}" width="40" /> {{ project.name }}
+      </div>
+    </div>
   </div>
 </div>

@@ -9,12 +9,15 @@ import { map } from "rxjs/operators";
   styleUrls: ["./project-detail.component.scss"]
 })
 export class ProjectDetailComponent implements OnInit {
-  selectedProject$;
+  selectedId$;
 
   constructor(private store: Store<{ project: IProjectState }>) {
-    this.selectedProject$ = store.pipe(
+    this.selectedId$ = store.pipe(
       select("project"),
-      map((data: IProjectState) => data.selectedProject)
+      map((data: IProjectState) => {
+        console.log("ID:", data.selectedId);
+        return data.selectedId;
+      })
     );
     // this.id$ = store.pipe(
     //   select("project"),

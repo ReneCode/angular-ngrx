@@ -3,11 +3,11 @@ import { ProjectActionTypes } from "./project.actions";
 
 export interface IProjectState {
   projects: object[];
-  selectedProject: string;
+  selectedId: string;
 }
 const initialState: IProjectState = {
   projects: [],
-  selectedProject: ""
+  selectedId: ""
 };
 
 export function projectReducer(state: IProjectState = initialState, action) {
@@ -18,7 +18,7 @@ export function projectReducer(state: IProjectState = initialState, action) {
     case ProjectActionTypes.SelectProject:
       return {
         ...state,
-        selectedProject: action.payload
+        selectedId: action.payload
       };
     case ProjectActionTypes.LoadProjectFinish:
       return {

@@ -21,14 +21,25 @@ export class PokemonService {
     const body = {
       query: `
       {
-        pokemons(first: 100){id name  image classification}
-        }
-      `
+        pokemons(first: 10){id name  image }
+      }`
     };
 
-    return this.http.post(this.url, body).pipe(
-      map((d: any) => d.data.pokemons)
-      // map((p: any) => p.name)
-    );
+    return this.http
+      .post(this.url, body)
+      .pipe(map((d: any) => d.data.pokemons));
+  }
+
+  getOne(id: string): Observable<object> {
+    const body = {
+      query: `
+      {
+        pokemon(id: ${id}) {
+          id name maxCP evolutions { id } classification
+        }
+      }`
+    };
+
+    return this.http.post(this.url, body).pipe(map((d: any) => d.data.pokemon));
   }
 }

@@ -1,3 +1,9 @@
+.scrolling {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
 .project-item {
   border: 1px solid #555;
   margin: 2px;
