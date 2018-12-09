@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { PokemonMasterComponent } from "./pokemon-master.component";
 
-describe("ProjectMasterComponent", () => {
+describe("PokemonMasterComponent", () => {
   let component: PokemonMasterComponent;
   let fixture: ComponentFixture<PokemonMasterComponent>;
 

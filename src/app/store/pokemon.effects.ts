@@ -2,26 +2,26 @@ import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { map, switchMap } from "rxjs/operators";
 import {
-  ProjectActionTypes,
-  LoadProjectTrigger,
-  LoadProjectFinish
-} from "./project.actions";
+  PokemonActionTypes,
+  LoadPokemonTrigger,
+  LoadPokemonFinish
+} from "./pokemon.actions";
 import { PokemonService } from "../services/pokemon.service";
 
 @Injectable({ providedIn: "root" })
-export class ProjectEffects {
+export class PokemonEffects {
   constructor(
     private actions$: Actions,
     private pokemonService: PokemonService
   ) {}
 
   @Effect()
-  loadProjectTrigger$ = this.actions$.pipe(
-    ofType(ProjectActionTypes.LoadProjectTrigger),
-    switchMap((action: LoadProjectTrigger) =>
+  loadPokemonTrigger$ = this.actions$.pipe(
+    ofType(PokemonActionTypes.LoadPokemonTrigger),
+    switchMap((action: LoadPokemonTrigger) =>
       this.pokemonService
         .getAll()
-        .pipe(map((data: []) => new LoadProjectFinish(data)))
+        .pipe(map((data: []) => new LoadPokemonFinish(data)))
     )
   );
 }

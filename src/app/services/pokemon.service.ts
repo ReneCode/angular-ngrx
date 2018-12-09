@@ -21,7 +21,7 @@ export class PokemonService {
     const body = {
       query: `
       {
-        pokemons(first: 10){id name  image }
+        pokemons(first: 50){id name  image }
       }`
     };
 
