@@ -1,3 +1,11 @@
+<div class="search">
+  <app-search-input
+    class="search-input"
+    [searchValue]="searchValue"
+    (onChange)="onSearchChange($event)"
+  >
+  </app-search-input>
+</div>
 <div class="scrolling">
   <app-pokemon-list
     [pokemons]="pokemons"

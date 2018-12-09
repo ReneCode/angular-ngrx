@@ -12,7 +12,9 @@ import { HomeComponent } from "./components/home/home.component";
 import { EffectsModule } from "@ngrx/effects";
 import { PokemonEffects } from "./store/pokemon.effects";
 import { HttpClientModule } from "@angular/common/http";
-import { PokemonListComponent } from './components/pokemon/pokemon-master/pokemon-list/pokemon-list.component';
+import { PokemonListComponent } from "./components/pokemon/pokemon-master/pokemon-list/pokemon-list.component";
+import { SearchInputComponent } from "./components/common/search-input/search-input.component";
+import { appState } from "./app.state";
 
 @NgModule({
   declarations: [
@@ -21,13 +23,14 @@ import { PokemonListComponent } from './components/pokemon/pokemon-master/pokemo
     PokemonDetailComponent,
     PokemonComponent,
     HomeComponent,
-    PokemonListComponent
+    PokemonListComponent,
+    SearchInputComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({ pokemon: pokemonReducer }),
+    StoreModule.forRoot(appState),
     EffectsModule.forRoot([PokemonEffects])
   ],
   providers: [],

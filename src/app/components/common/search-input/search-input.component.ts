@@ -1,7 +1,13 @@
-import { Component, OnInit, Input, OnDestroy, Output } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  OnDestroy,
+  Output,
+  EventEmitter
+} from "@angular/core";
 import { Observable, Subscriber, Subscription } from "rxjs";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
-import { EventEmitter } from "protractor";
 
 @Component({
   selector: "app-search-input",
@@ -12,7 +18,6 @@ export class SearchInputComponent implements OnInit, OnDestroy {
   @Input() searchValue: string;
   @Output() onChange = new EventEmitter();
 
-  value: string;
   changeValueSubscriber: Subscriber<string>;
   subscription: Subscription;
 

@@ -16,20 +16,27 @@ import {
 export class PokemonMasterComponent implements OnInit, OnDestroy {
   pokemons: object[];
   selectedId: string = "";
+  searchValue: string = "";
   subscription: Subscription;
 
-  constructor(private store: Store<{ pokemon: IPokemonState }>) {
-    this.subscription = store
+  constructor(private store: Store<{ pokemon: IPokemonState }>) {}
+
+  ngOnInit() {
+    this.subscription = this.store
       .pipe(
         select("pokemon"),
         map((state: IPokemonState) => {
           this.selectedId = state.selectedId;
           this.pokemons = state.pokemons;
+          this.searchValue = state.searchValue;
           return state.pokemons;
         })
       )
       .subscribe();
+
+    this.store.dispatch(new LoadPokemonTrigger());
   }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
@@ -38,7 +45,8 @@ export class PokemonMasterComponent implements OnInit, OnDestroy {
     this.store.dispatch(new SelectPokemon(pokemon.id));
   }
 
-  ngOnInit() {
-    this.store.dispatch(new LoadPokemonTrigger());
+  onSearchChange(searchValue: string) {
+    console.log(searchValue);
+    this.store.dispatch(new LoadPokemonTrigger(searchValue));
   }
 }

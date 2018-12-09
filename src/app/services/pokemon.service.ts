@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
-import { map } from "rxjs/operators";
+import { map, filter } from "rxjs/operators";
 import { of, Observable } from "rxjs";
 
 const httpOptions = {
@@ -17,7 +17,7 @@ export class PokemonService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<object> {
+  getAll(searchValue: string): Observable<object> {
     const body = {
       query: `
       {
@@ -25,9 +25,17 @@ export class PokemonService {
       }`
     };
 
-    return this.http
-      .post(this.url, body)
-      .pipe(map((d: any) => d.data.pokemons));
+    return this.http.post(this.url, body).pipe(
+      map((d: any) => d.data.pokemons),
+      map((pokemons: any[]) => {
+        if (!searchValue) {
+          return pokemons;
+        } else {
+          const sv = searchValue.toLowerCase();
+          return pokemons.filter((p: any) => p.name.toLowerCase().includes(sv));
+        }
+      })
+    );
   }
 
   getOne(id: string): Observable<object> {

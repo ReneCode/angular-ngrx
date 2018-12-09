@@ -4,11 +4,13 @@ export interface IPokemonState {
   pokemons: object[];
   selectedId: string;
   onePokemon: object;
+  searchValue: string;
 }
 const initialState: IPokemonState = {
   pokemons: [],
   selectedId: "",
-  onePokemon: undefined
+  onePokemon: undefined,
+  searchValue: ""
 };
 
 export function pokemonReducer(
@@ -34,6 +36,12 @@ export function pokemonReducer(
       return {
         ...state,
         onePokemon: action.payload
+      };
+
+    case PokemonActionTypes.SetSearchValue:
+      return {
+        ...state,
+        searchValue: action.payload
       };
   }
 }

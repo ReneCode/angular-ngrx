@@ -6,11 +6,16 @@ export enum PokemonActionTypes {
   LoadOnePokemonTrigger = "LOAD_ONE_POKEMON_TRIGGER",
   LoadOnePokemonFinish = "LOAD_ONE_POKEMON_FINISH",
   SelectPokemon = "SELECT_POKEMON",
-  SelectNextPokemon = "SELECT_NEXT_POKEMON"
+  SelectNextPokemon = "SELECT_NEXT_POKEMON",
+  SetSearchValue = "SET_SEARCH_VALUE"
 }
 
 export class LoadPokemonTrigger implements Action {
   readonly type = PokemonActionTypes.LoadPokemonTrigger;
+  payload: string;
+  constructor(searchValue: string = "") {
+    this.payload = searchValue;
+  }
 }
 
 export class LoadPokemonFinish implements Action {
@@ -45,5 +50,13 @@ export class LoadOnePokemonFinish implements Action {
   payload: object;
   constructor(pokemon: object) {
     this.payload = pokemon;
+  }
+}
+
+export class SetSearchValue implements Action {
+  readonly type = PokemonActionTypes.SetSearchValue;
+  payload: string;
+  constructor(searchValue: string) {
+    this.payload = searchValue;
   }
 }
