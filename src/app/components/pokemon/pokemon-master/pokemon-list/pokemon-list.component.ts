@@ -6,8 +6,10 @@ import { Component, EventEmitter, OnInit, Input, Output } from "@angular/core";
   styleUrls: ["./pokemon-list.component.scss"]
 })
 export class PokemonListComponent implements OnInit {
-  @Input() pokemons$;
+  @Input() pokemons;
+  @Input() selectedId;
   @Output() selectPokemon = new EventEmitter();
+
   constructor() {}
 
   ngOnInit() {}

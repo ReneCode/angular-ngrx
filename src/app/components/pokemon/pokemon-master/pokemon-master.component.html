@@ -1,6 +1,7 @@
 <div class="scrolling">
   <app-pokemon-list
-    [pokemons$]="pokemons$"
+    [pokemons]="pokemons"
+    [selectedId]="selectedId"
     (selectPokemon)="selectPokemon($event)"
   >
   </app-pokemon-list>

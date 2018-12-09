@@ -21,7 +21,7 @@ export class PokemonService {
     const body = {
       query: `
       {
-        pokemons(first: 10){id name  image }
+        pokemons(first: 100){id name  image }
       }`
     };
 
@@ -40,6 +40,7 @@ export class PokemonService {
         pokemon(id: $id) {
           id
           name
+          image
           classification
           types
           resistant

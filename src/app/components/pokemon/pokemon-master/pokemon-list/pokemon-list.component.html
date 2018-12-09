@@ -1,6 +1,9 @@
 <div class="pokemon-list">
-  <div *ngFor="let pokemon of (pokemons$ | async)">
-    <div class="pokemon-item" (click)="onClick(pokemon)">
+  <div *ngFor="let pokemon of pokemons">
+    <div
+      [ngClass]="{ 'pokemon-item': true, active: pokemon.id === selectedId }"
+      (click)="onClick(pokemon)"
+    >
       <img src="{{pokemon.image}}" width="40" /> <span>{{ pokemon.name }}</span>
     </div>
   </div>
