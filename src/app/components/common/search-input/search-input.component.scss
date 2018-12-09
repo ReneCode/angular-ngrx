@@ -1,0 +1,9 @@
+input {
+  width: 100%;
+  font-size: 16px;
+  // box-shadow: 2px 2px 10px #333;
+}
+
+input:focus {
+  outline: none;
+}
