@@ -21,7 +21,7 @@ export class PokemonService {
     const body = {
       query: `
       {
-        pokemons(first: 50){id name  image }
+        pokemons(first: 10){id name  image }
       }`
     };
 
@@ -31,13 +31,27 @@ export class PokemonService {
   }
 
   getOne(id: string): Observable<object> {
+    if (!id) {
+      return of(null);
+    }
     const body = {
       query: `
-      {
-        pokemon(id: ${id}) {
-          id name maxCP evolutions { id } classification
+      query q($id: String) {
+        pokemon(id: $id) {
+          id
+          name
+          classification
+          types
+          resistant
+          evolutions {
+            id
+            name
+          }
         }
-      }`
+      }`,
+      variables: {
+        id: id
+      }
     };
 
     return this.http.post(this.url, body).pipe(map((d: any) => d.data.pokemon));

@@ -1,0 +1,12 @@
+.property {
+  display: flex;
+  flex-direction: row;
+}
+.property :nth-child(1) {
+  width: 150px;
+  flex-grow: 0;
+  padding: 3px;
+}
+.property :nth-child(2) {
+  flex-grow: 1;
+}

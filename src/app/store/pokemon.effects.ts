@@ -4,7 +4,9 @@ import { map, switchMap } from "rxjs/operators";
 import {
   PokemonActionTypes,
   LoadPokemonTrigger,
-  LoadPokemonFinish
+  LoadPokemonFinish,
+  LoadOnePokemonTrigger,
+  LoadOnePokemonFinish
 } from "./pokemon.actions";
 import { PokemonService } from "../services/pokemon.service";
 
@@ -22,6 +24,16 @@ export class PokemonEffects {
       this.pokemonService
         .getAll()
         .pipe(map((data: []) => new LoadPokemonFinish(data)))
+    )
+  );
+
+  @Effect()
+  LoadOnePokemonTrigger$ = this.actions$.pipe(
+    ofType(PokemonActionTypes.LoadOnePokemonTrigger),
+    switchMap((action: LoadOnePokemonTrigger) =>
+      this.pokemonService
+        .getOne(action.payload)
+        .pipe(map((data: object) => new LoadOnePokemonFinish(data)))
     )
   );
 }

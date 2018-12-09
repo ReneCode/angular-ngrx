@@ -20,7 +20,7 @@ export class PokemonMasterComponent implements OnInit {
   constructor(private store: Store<{ pokemon: IPokemonState }>) {
     this.pokemons$ = store.pipe(
       select("pokemon"),
-      map((data: IPokemonState) => data.pokemons)
+      map((state: IPokemonState) => state.pokemons)
     );
   }
 
