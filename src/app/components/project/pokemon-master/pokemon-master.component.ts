@@ -9,11 +9,11 @@ import {
 } from "src/app/store/project.actions";
 
 @Component({
-  selector: "app-project-master",
-  templateUrl: "./project-master.component.html",
-  styleUrls: ["./project-master.component.scss"]
+  selector: "app-pokemon-master",
+  templateUrl: "./pokemon-master.component.html",
+  styleUrls: ["./pokemon-master.component.scss"]
 })
-export class ProjectMasterComponent implements OnInit {
+export class PokemonMasterComponent implements OnInit {
   projects$: Observable<object[]>;
   id$: Observable<string>;
 

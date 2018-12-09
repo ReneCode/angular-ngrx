@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ProjectMasterComponent } from "./project-master.component";
+import { PokemonMasterComponent } from "./pokemon-master.component";
 
 describe("ProjectMasterComponent", () => {
-  let component: ProjectMasterComponent;
-  let fixture: ComponentFixture<ProjectMasterComponent>;
+  let component: PokemonMasterComponent;
+  let fixture: ComponentFixture<PokemonMasterComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ProjectMasterComponent]
+      declarations: [PokemonMasterComponent]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProjectMasterComponent);
+    fixture = TestBed.createComponent(PokemonMasterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

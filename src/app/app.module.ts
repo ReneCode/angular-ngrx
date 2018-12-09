@@ -5,7 +5,7 @@ import { StoreModule } from "@ngrx/store";
 import { projectReducer } from "./store/project.reducer";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./components/app.component";
-import { ProjectMasterComponent } from "./components/project/project-master/project-master.component";
+import { PokemonMasterComponent } from "./components/project/pokemon-master/pokemon-master.component";
 import { ProjectDetailComponent } from "./components/project/project-detail/project-detail.component";
 import { ProjectComponent } from "./components/project/project.component";
 import { HomeComponent } from "./components/home/home.component";
@@ -16,7 +16,7 @@ import { HttpClientModule } from "@angular/common/http";
 @NgModule({
   declarations: [
     AppComponent,
-    ProjectMasterComponent,
+    PokemonMasterComponent,
     ProjectDetailComponent,
     ProjectComponent,
     HomeComponent
