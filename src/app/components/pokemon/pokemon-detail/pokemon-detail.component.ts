@@ -15,14 +15,10 @@ export class PokemonDetailComponent implements OnInit {
     this.selectedId$ = store.pipe(
       select("pokemon"),
       map((data: IPokemonState) => {
-        console.log("ID:", data.selectedId);
+        // console.log("ID:", data.selectedId);
         return data.selectedId;
       })
     );
-    // this.id$ = store.pipe(
-    //   select("project"),
-    //   map((data: IPokemonState) => data.id)
-    // );
   }
 
   ngOnInit() {}

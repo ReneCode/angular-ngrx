@@ -12,6 +12,7 @@ import { HomeComponent } from "./components/home/home.component";
 import { EffectsModule } from "@ngrx/effects";
 import { PokemonEffects } from "./store/pokemon.effects";
 import { HttpClientModule } from "@angular/common/http";
+import { PokemonListComponent } from './components/pokemon/pokemon-master/pokemon-list/pokemon-list.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HttpClientModule } from "@angular/common/http";
     PokemonMasterComponent,
     PokemonDetailComponent,
     PokemonComponent,
-    HomeComponent
+    HomeComponent,
+    PokemonListComponent
   ],
   imports: [
     HttpClientModule,

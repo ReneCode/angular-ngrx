@@ -24,7 +24,7 @@ export class PokemonMasterComponent implements OnInit {
     );
   }
 
-  selectPokemon(pokemon: object) {
+  selectPokemon(pokemon: any) {
     this.store.dispatch(new SelectPokemon(pokemon.id));
   }
 
