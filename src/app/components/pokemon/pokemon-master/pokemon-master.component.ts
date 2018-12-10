@@ -28,7 +28,6 @@ export class PokemonMasterComponent implements OnInit, OnDestroy {
         map((state: IPokemonState) => {
           this.selectedId = state.selectedId;
           this.pokemons = state.pokemons;
-          this.searchValue = state.searchValue;
           return state.pokemons;
         })
       )
@@ -46,7 +45,6 @@ export class PokemonMasterComponent implements OnInit, OnDestroy {
   }
 
   onSearchChange(searchValue: string) {
-    console.log(searchValue);
     this.store.dispatch(new LoadPokemonTrigger(searchValue));
   }
 }

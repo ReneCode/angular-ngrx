@@ -1,7 +1,6 @@
 import { pokemonReducer } from "./store/pokemon.reducer";
+import { ActionReducerMap, Action } from "@ngrx/store";
 
-export interface IAppState {
-  pokemon: Function;
-}
+export type AppState = ActionReducerMap<{ pokemon: {} }, Action>;
 
-export const appState: IAppState = { pokemon: pokemonReducer };
+export const appState: AppState = { pokemon: pokemonReducer };

@@ -1,5 +1,4 @@
 .pokemon-item {
-  border: 1px solid #555;
   background: #fff;
   margin: 5px;
   padding: 10px;
@@ -7,6 +6,7 @@
 
 .pokemon-item:hover {
   cursor: pointer;
+  box-shadow: 2px 2px 4px #555;
   background: #bbb;
 }
 

@@ -3,11 +3,11 @@ import { Action } from "@ngrx/store";
 export enum PokemonActionTypes {
   LoadPokemonTrigger = "LOAD_POKEMON_TRIGGER",
   LoadPokemonFinish = "LOAD_POKEMON_FINISH",
+  SetRawPokemon = "SET_RAW_POKEMON",
   LoadOnePokemonTrigger = "LOAD_ONE_POKEMON_TRIGGER",
   LoadOnePokemonFinish = "LOAD_ONE_POKEMON_FINISH",
   SelectPokemon = "SELECT_POKEMON",
-  SelectNextPokemon = "SELECT_NEXT_POKEMON",
-  SetSearchValue = "SET_SEARCH_VALUE"
+  SelectNextPokemon = "SELECT_NEXT_POKEMON"
 }
 
 export class LoadPokemonTrigger implements Action {
@@ -20,11 +20,20 @@ export class LoadPokemonTrigger implements Action {
 
 export class LoadPokemonFinish implements Action {
   readonly type = PokemonActionTypes.LoadPokemonFinish;
+  payload: object[];
+  constructor(pokemons: object[]) {
+    this.payload = pokemons;
+  }
+}
+
+export class SetRawPokemon implements Action {
+  readonly type = PokemonActionTypes.SetRawPokemon;
   payload: string[];
   constructor(pokemons: string[]) {
     this.payload = pokemons;
   }
 }
+
 export class SelectPokemon implements Action {
   readonly type = PokemonActionTypes.SelectPokemon;
   payload: string;
@@ -50,13 +59,5 @@ export class LoadOnePokemonFinish implements Action {
   payload: object;
   constructor(pokemon: object) {
     this.payload = pokemon;
-  }
-}
-
-export class SetSearchValue implements Action {
-  readonly type = PokemonActionTypes.SetSearchValue;
-  payload: string;
-  constructor(searchValue: string) {
-    this.payload = searchValue;
   }
 }

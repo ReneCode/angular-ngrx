@@ -1,16 +1,16 @@
 import { PokemonActionTypes } from "./pokemon.actions";
 
 export interface IPokemonState {
+  rawPokemons: object[];
   pokemons: object[];
   selectedId: string;
   onePokemon: object;
-  searchValue: string;
 }
 const initialState: IPokemonState = {
+  rawPokemons: [],
   pokemons: [],
   selectedId: "",
-  onePokemon: undefined,
-  searchValue: ""
+  onePokemon: undefined
 };
 
 export function pokemonReducer(
@@ -18,12 +18,15 @@ export function pokemonReducer(
   action
 ): IPokemonState {
   switch (action.type) {
-    default:
-      return state;
     case PokemonActionTypes.SelectPokemon:
       return {
         ...state,
         selectedId: action.payload
+      };
+    case PokemonActionTypes.SetRawPokemon:
+      return {
+        ...state,
+        rawPokemons: action.payload
       };
     case PokemonActionTypes.LoadPokemonFinish:
       return {
@@ -38,10 +41,7 @@ export function pokemonReducer(
         onePokemon: action.payload
       };
 
-    case PokemonActionTypes.SetSearchValue:
-      return {
-        ...state,
-        searchValue: action.payload
-      };
+    default:
+      return state;
   }
 }
