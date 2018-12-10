@@ -1,16 +1,16 @@
 import { PokemonActionTypes } from "./pokemon.actions";
 
 export interface IPokemonState {
-  rawPokemons: object[];
-  pokemons: object[];
   selectedId: string;
   onePokemon: object;
+  pokemons: object[];
+  rawPokemons: object[];
 }
 const initialState: IPokemonState = {
-  rawPokemons: [],
-  pokemons: [],
   selectedId: "",
-  onePokemon: undefined
+  onePokemon: undefined,
+  pokemons: [],
+  rawPokemons: []
 };
 
 export function pokemonReducer(

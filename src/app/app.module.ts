@@ -15,6 +15,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { PokemonListComponent } from "./components/pokemon/pokemon-master/pokemon-list/pokemon-list.component";
 import { SearchInputComponent } from "./components/common/search-input/search-input.component";
 import { appState } from "./app.state";
+import { PokemonStateComponent } from "./components/pokemon/pokemon-state/pokemon-state.component";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { appState } from "./app.state";
     PokemonComponent,
     HomeComponent,
     PokemonListComponent,
-    SearchInputComponent
+    SearchInputComponent,
+    PokemonStateComponent
   ],
   imports: [
     HttpClientModule,
