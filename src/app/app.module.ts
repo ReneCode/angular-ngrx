@@ -1,8 +1,8 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { StoreModule } from "@ngrx/store";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 
-import { pokemonReducer } from "./store/pokemon.reducer";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./components/app.component";
 import { PokemonMasterComponent } from "./components/pokemon/pokemon-master/pokemon-master.component";
@@ -33,7 +33,8 @@ import { PokemonStateComponent } from "./components/pokemon/pokemon-state/pokemo
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(appState),
-    EffectsModule.forRoot([PokemonEffects])
+    EffectsModule.forRoot([PokemonEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 20 })
   ],
   providers: [],
   bootstrap: [AppComponent]
