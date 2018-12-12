@@ -1,3 +1,9 @@
+# RXJS
+
+- selectors: https://www.youtube.com/watch?v=Y4McLi9scfc
+- starting: https://github.com/juristr/egghead-learn-angular-router/tree/04-routing-modules/src/app
+- documentation: https://ngrx.io/guide/store
+
 # TryoutAngular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.2.
