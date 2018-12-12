@@ -16,6 +16,7 @@ import { PokemonListComponent } from "./components/pokemon/pokemon-master/pokemo
 import { SearchInputComponent } from "./components/common/search-input/search-input.component";
 import { appState } from "./app.state";
 import { PokemonStateComponent } from "./components/pokemon/pokemon-state/pokemon-state.component";
+import { PokemonImageComponent } from './components/pokemon/pokemon-image/pokemon-image.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { PokemonStateComponent } from "./components/pokemon/pokemon-state/pokemo
     HomeComponent,
     PokemonListComponent,
     SearchInputComponent,
-    PokemonStateComponent
+    PokemonStateComponent,
+    PokemonImageComponent
   ],
   imports: [
     HttpClientModule,

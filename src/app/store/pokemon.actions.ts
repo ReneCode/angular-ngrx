@@ -6,8 +6,8 @@ export enum PokemonActionTypes {
   SetRawPokemon = "SET_RAW_POKEMON",
   LoadOnePokemonTrigger = "LOAD_ONE_POKEMON_TRIGGER",
   LoadOnePokemonFinish = "LOAD_ONE_POKEMON_FINISH",
-  SelectPokemon = "SELECT_POKEMON",
-  SelectNextPokemon = "SELECT_NEXT_POKEMON"
+  SelectPokemonId = "SELECT_POKEMON_ID"
+  // SelectNextPokemon = "SELECT_NEXT_POKEMON"
 }
 
 export class LoadPokemonTrigger implements Action {
@@ -34,17 +34,17 @@ export class SetRawPokemon implements Action {
   }
 }
 
-export class SelectPokemon implements Action {
-  readonly type = PokemonActionTypes.SelectPokemon;
+export class SelectPokemonId implements Action {
+  readonly type = PokemonActionTypes.SelectPokemonId;
   payload: string;
   constructor(pokemonId: string) {
     this.payload = pokemonId;
   }
 }
 
-export class SelectNextPokemon implements Action {
-  readonly type = PokemonActionTypes.SelectNextPokemon;
-}
+// export class SelectNextPokemon implements Action {
+//   readonly type = PokemonActionTypes.SelectNextPokemon;
+// }
 
 export class LoadOnePokemonTrigger implements Action {
   readonly type = PokemonActionTypes.LoadOnePokemonTrigger;

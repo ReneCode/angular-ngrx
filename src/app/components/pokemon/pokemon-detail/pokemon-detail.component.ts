@@ -1,12 +1,13 @@
 import { Component, OnInit, Input, OnDestroy } from "@angular/core";
 import { Store, select } from "@ngrx/store";
-import { IPokemonState } from "src/app/store/pokemon.reducer";
-import { map } from "rxjs/operators";
 import {
-  SelectPokemon,
-  LoadOnePokemonTrigger
-} from "src/app/store/pokemon.actions";
-import { Subscription } from "rxjs";
+  IPokemonState,
+  selectLoadingOnePokemon
+} from "src/app/store/pokemon.reducer";
+import { map } from "rxjs/operators";
+import { LoadOnePokemonTrigger } from "src/app/store/pokemon.actions";
+import { Subscription, Observable } from "rxjs";
+import { AppState } from "src/app/app.state";
 
 @Component({
   selector: "app-pokemon-detail",
@@ -17,8 +18,10 @@ export class PokemonDetailComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   pokemon;
   oldSelectedId: string;
+  loading$: Observable<boolean>;
 
-  constructor(private store: Store<{ pokemon: IPokemonState }>) {
+  constructor(private store: Store<AppState>) {
+    this.loading$ = store.select(selectLoadingOnePokemon);
     this.subscription = store
       .pipe(
         select("pokemon"),

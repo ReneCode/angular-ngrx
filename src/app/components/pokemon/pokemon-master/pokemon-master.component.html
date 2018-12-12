@@ -8,8 +8,8 @@
 </div>
 <div class="scrolling">
   <app-pokemon-list
-    [pokemons]="pokemons"
-    [selectedId]="selectedId"
+    [pokemons]="pokemons$ | async"
+    [selectedId]="selectedId$ | async"
     (selectPokemon)="selectPokemon($event)"
   >
   </app-pokemon-list>

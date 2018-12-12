@@ -1,18 +1,22 @@
-<h2>{{ pokemon.name }}</h2>
-<img src="{{pokemon.image}}" alt="" />
-<div class="property">
-  <div>Name</div>
-  <div>{{ pokemon.name }}</div>
+<div *ngIf="(loading$ | async) as loading; else: display">
+  <div>loading ...</div>
 </div>
-<div class="property">
-  <div>Classification</div>
-  <div>{{ pokemon.classification }}</div>
-</div>
-<div class="property">
-  <div>Types</div>
-  <div>{{ pokemon.types }}</div>
-</div>
-<div class="property">
-  <div>Resistant</div>
-  <div>{{ pokemon.resistant }}</div>
-</div>
+<ng-template #display>
+  <h2>{{ pokemon.name }}</h2>
+  <div class="property">
+    <div>Name</div>
+    <div>{{ pokemon.name }}</div>
+  </div>
+  <div class="property">
+    <div>Classification</div>
+    <div>{{ pokemon.classification }}</div>
+  </div>
+  <div class="property">
+    <div>Types</div>
+    <div>{{ pokemon.types }}</div>
+  </div>
+  <div class="property">
+    <div>Resistant</div>
+    <div>{{ pokemon.resistant }}</div>
+  </div>
+</ng-template>
