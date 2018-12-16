@@ -1,7 +1,7 @@
 <div class="search">
   <app-search-input
     class="search-input"
-    [searchValue]="searchValue"
+    [searchValue]="searchValue$ | async"
     (onChange)="onSearchChange($event)"
   >
   </app-search-input>
