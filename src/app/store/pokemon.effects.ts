@@ -1,19 +1,17 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
-import { map, switchMap, withLatestFrom, filter } from "rxjs/operators";
+import { map, switchMap, concatMapTo } from "rxjs/operators";
 import {
   PokemonActionTypes,
-  LoadPokemonTrigger,
-  LoadPokemonFinish,
   LoadOnePokemonTrigger,
   LoadOnePokemonFinish,
-  SetRawPokemon
+  LoadAllPokemonsTrigger,
+  LoadAllPokemonsFinish,
+  SelectPokemonId
 } from "./pokemon.actions";
 import { PokemonService } from "../services/pokemon.service";
-import { Store, select, Action } from "@ngrx/store";
+import { Store } from "@ngrx/store";
 import { AppState } from "../app.state";
-import { IPokemonState } from "./pokemon.reducer";
-import { of } from "rxjs";
 
 @Injectable({ providedIn: "root" })
 export class PokemonEffects {
@@ -24,33 +22,21 @@ export class PokemonEffects {
   ) {}
 
   @Effect()
-  // use rawPokemons as cache
-  loadPokemonTrigger$ = this.actions$.pipe(
-    ofType(PokemonActionTypes.LoadPokemonTrigger),
-    map(action => action as LoadPokemonTrigger),
-    withLatestFrom(this.store$.pipe(select("pokemon"))),
-    switchMap(result => {
-      const action: LoadPokemonTrigger = result[0];
-      const state: IPokemonState = result[1];
-      if (state.rawPokemons.length > 0) {
-        // cache is filled
-        const sv = action.payload.toLowerCase();
-        const filteredPokemons = state.rawPokemons.filter((p: any) =>
-          p.name.toLowerCase().includes(sv)
-        );
-        return of(filteredPokemons).pipe(
-          map(data => new LoadPokemonFinish(data))
-        );
-      } else {
-        // first call - get data from API and fill cache
-        return this.pokemonService.getAll(action.payload).pipe(
-          switchMap((data: []) => {
-            // dispatch two actions
-            return [new LoadPokemonFinish(data), new SetRawPokemon(data)];
-          })
-        );
-      }
-    })
+  loadAllPokemonsTrigger$ = this.actions$.pipe(
+    ofType(PokemonActionTypes.LoadAllPokemonsTrigger),
+    map(action => action as LoadAllPokemonsTrigger),
+    switchMap(() =>
+      this.pokemonService
+        .getAll()
+        .pipe(map((data: object[]) => new LoadAllPokemonsFinish(data)))
+    )
+  );
+
+  @Effect()
+  selectPokemonId$ = this.actions$.pipe(
+    ofType(PokemonActionTypes.SelectPokemonId),
+    map(action => action as SelectPokemonId),
+    map(action => new LoadOnePokemonTrigger(action.payload))
   );
 
   @Effect()

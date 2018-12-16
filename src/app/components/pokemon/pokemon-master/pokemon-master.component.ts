@@ -1,15 +1,14 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { Observable, Subscription } from "rxjs";
-import { map } from "rxjs/operators";
+import { Observable, BehaviorSubject } from "rxjs";
+import { switchMap, map } from "rxjs/operators";
 import { select, Store } from "@ngrx/store";
 import {
-  IPokemonState,
   selectSelectedPokemonId,
-  selectAllPokemons
+  selectFilteredPokemons
 } from "src/app/store/pokemon.reducer";
 import {
   SelectPokemonId,
-  LoadPokemonTrigger
+  LoadAllPokemonsTrigger
 } from "src/app/store/pokemon.actions";
 import { AppState } from "src/app/app.state";
 
@@ -21,15 +20,30 @@ import { AppState } from "src/app/app.state";
 export class PokemonMasterComponent implements OnInit, OnDestroy {
   selectedId$: Observable<string>;
   pokemons$: Observable<object[]>;
-  searchValue: string = "";
+  searchValue$ = new BehaviorSubject<string>("");
 
   constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
-    this.pokemons$ = this.store.pipe(select(selectAllPokemons));
+    this.pokemons$ = this.searchValue$.pipe(
+      switchMap((sv: string) =>
+        // searchValue has changed => filter the list
+        this.store.pipe(
+          select(selectFilteredPokemons(sv)),
+          map(data => {
+            // select the first element
+            if (data.length > 0) {
+              this.store.dispatch(new SelectPokemonId(data[0].id));
+            }
+            return data;
+          })
+        )
+      )
+    );
+
     this.selectedId$ = this.store.pipe(select(selectSelectedPokemonId));
 
-    this.store.dispatch(new LoadPokemonTrigger());
+    this.store.dispatch(new LoadAllPokemonsTrigger());
   }
 
   ngOnDestroy() {}
@@ -39,6 +53,6 @@ export class PokemonMasterComponent implements OnInit, OnDestroy {
   }
 
   onSearchChange(searchValue: string) {
-    this.store.dispatch(new LoadPokemonTrigger(searchValue));
+    this.searchValue$.next(searchValue);
   }
 }

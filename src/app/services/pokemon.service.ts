@@ -17,7 +17,7 @@ export class PokemonService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(searchValue: string): Observable<object> {
+  getAll(searchValue: string = ""): Observable<object> {
     const body = {
       query: `
       {

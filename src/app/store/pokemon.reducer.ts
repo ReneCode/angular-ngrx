@@ -5,15 +5,13 @@ export interface IPokemonState {
   selectedId: string;
   onePokemon: object;
   loadingOnePokemon: boolean;
-  pokemons: object[];
-  rawPokemons: object[];
+  allPokemons: object[];
 }
 const initialState: IPokemonState = {
   selectedId: "",
   onePokemon: undefined,
   loadingOnePokemon: false,
-  pokemons: [],
-  rawPokemons: []
+  allPokemons: []
 };
 
 export function pokemonReducer(
@@ -21,21 +19,17 @@ export function pokemonReducer(
   action
 ): IPokemonState {
   switch (action.type) {
+    case PokemonActionTypes.LoadAllPokemonsFinish:
+      return {
+        ...state,
+        allPokemons: action.payload,
+        selectedId: action.payload.length > 0 ? action.payload[0].id : ""
+      };
+
     case PokemonActionTypes.SelectPokemonId:
       return {
         ...state,
         selectedId: action.payload
-      };
-    case PokemonActionTypes.SetRawPokemon:
-      return {
-        ...state,
-        rawPokemons: action.payload
-      };
-    case PokemonActionTypes.LoadPokemonFinish:
-      return {
-        ...state,
-        pokemons: action.payload,
-        selectedId: action.payload.length === 0 ? "" : action.payload[0].id
       };
 
     case PokemonActionTypes.LoadOnePokemonTrigger:
@@ -60,12 +54,24 @@ export const selectPokemonState = createFeatureSelector<IPokemonState>(
 );
 export const selectAllPokemons = createSelector(
   selectPokemonState,
-  state => state.pokemons
+  state => state.allPokemons
 );
+
+export const selectFilteredPokemons = (filter: string) => {
+  return createSelector(
+    selectAllPokemons,
+    (pokemons: any) => {
+      const sv = filter.toLowerCase();
+      return pokemons.filter((p: any) => p.name.toLowerCase().includes(sv));
+    }
+  );
+};
+
 export const selectSelectedPokemonId = createSelector(
   selectPokemonState,
   (state: IPokemonState) => state.selectedId
 );
+
 export const selectSelectedPokemon = createSelector(
   selectAllPokemons,
   selectSelectedPokemonId,
@@ -75,4 +81,9 @@ export const selectSelectedPokemon = createSelector(
 export const selectLoadingOnePokemon = createSelector(
   selectPokemonState,
   (state: IPokemonState) => state.loadingOnePokemon
+);
+
+export const selectOnePokemon = createSelector(
+  selectPokemonState,
+  (state: IPokemonState) => state.onePokemon
 );

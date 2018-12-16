@@ -1,11 +1,9 @@
-import { Component, OnInit, Input, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Store, select } from "@ngrx/store";
 import {
-  IPokemonState,
-  selectLoadingOnePokemon
+  selectLoadingOnePokemon,
+  selectOnePokemon
 } from "src/app/store/pokemon.reducer";
-import { map } from "rxjs/operators";
-import { LoadOnePokemonTrigger } from "src/app/store/pokemon.actions";
 import { Subscription, Observable } from "rxjs";
 import { AppState } from "src/app/app.state";
 
@@ -16,34 +14,16 @@ import { AppState } from "src/app/app.state";
 })
 export class PokemonDetailComponent implements OnInit, OnDestroy {
   subscription: Subscription;
-  pokemon;
-  oldSelectedId: string;
+  pokemon$: Observable<object>;
   loading$: Observable<boolean>;
 
-  constructor(private store: Store<AppState>) {
-    this.loading$ = store.select(selectLoadingOnePokemon);
-    this.subscription = store
-      .pipe(
-        select("pokemon"),
-        map((state: IPokemonState) => {
-          if (this.oldSelectedId !== state.selectedId) {
-            this.oldSelectedId = state.selectedId;
-            this.store.dispatch(new LoadOnePokemonTrigger(state.selectedId));
-          }
-          if (!state.onePokemon) {
-            this.pokemon = {};
-          } else {
-            this.pokemon = state.onePokemon;
-          }
-          return state.selectedId;
-        })
-      )
-      .subscribe();
+  constructor(store: Store<AppState>) {
+    this.loading$ = store.pipe(select(selectLoadingOnePokemon));
+
+    this.pokemon$ = store.pipe(select(selectOnePokemon));
   }
 
   ngOnInit() {}
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+  ngOnDestroy() {}
 }

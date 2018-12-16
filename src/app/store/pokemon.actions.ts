@@ -1,35 +1,23 @@
 import { Action } from "@ngrx/store";
 
 export enum PokemonActionTypes {
-  LoadPokemonTrigger = "LOAD_POKEMON_TRIGGER",
-  LoadPokemonFinish = "LOAD_POKEMON_FINISH",
-  SetRawPokemon = "SET_RAW_POKEMON",
+  LoadAllPokemonsTrigger = "LOAD_ALL_POKEMONS_TRIGGER",
+  LoadAllPokemonsFinish = "LOAD_ALL_POKEMONS_FINISH",
   LoadOnePokemonTrigger = "LOAD_ONE_POKEMON_TRIGGER",
   LoadOnePokemonFinish = "LOAD_ONE_POKEMON_FINISH",
   SelectPokemonId = "SELECT_POKEMON_ID"
-  // SelectNextPokemon = "SELECT_NEXT_POKEMON"
+  // SelectNextPokemon = "SELECT_NEXT_POKEMON",
+  // SelectPrevPokemon = "SELECT_PREV_POKEMON"
 }
 
-export class LoadPokemonTrigger implements Action {
-  readonly type = PokemonActionTypes.LoadPokemonTrigger;
-  payload: string;
-  constructor(searchValue: string = "") {
-    this.payload = searchValue;
-  }
+export class LoadAllPokemonsTrigger implements Action {
+  readonly type = PokemonActionTypes.LoadAllPokemonsTrigger;
 }
 
-export class LoadPokemonFinish implements Action {
-  readonly type = PokemonActionTypes.LoadPokemonFinish;
+export class LoadAllPokemonsFinish implements Action {
+  readonly type = PokemonActionTypes.LoadAllPokemonsFinish;
   payload: object[];
   constructor(pokemons: object[]) {
-    this.payload = pokemons;
-  }
-}
-
-export class SetRawPokemon implements Action {
-  readonly type = PokemonActionTypes.SetRawPokemon;
-  payload: string[];
-  constructor(pokemons: string[]) {
     this.payload = pokemons;
   }
 }
